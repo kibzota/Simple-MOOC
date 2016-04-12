@@ -9,7 +9,7 @@
         <div class="pure-u-1">
             <div class="l-box splash-text">
                 <h1 class="splash-head">
-                    {{ course.name }}
+                    {{ course }}
                 </h1>
                 <h2 class="splash-subhead">
                     {{ course.description }}
@@ -24,7 +24,7 @@
 <div class="pure-g-r content-ribbon">
     <div class="pure-u-2-3">
         <div class="l-box">
-            <h4 class="content-subhead">Sobre o Curso {{course.name}}</h4>
+            <h4 class="content-subhead">Sobre o Curso</h4>
             {{ course.about|linebreaks }}
         </div>
     </div>
@@ -35,14 +35,18 @@
             {% else %}
             <img src="{% static 'img/course-image.png' %}" alt="" />
             {% endif %}
+            <h4>DÃºvidas?</h4>
+            <p>
+                <a href="#contato" title="" class="pure-button">Fale Conosco</a>
+            </p>
         </div>
     </div>
 </div>
 <div class="pure-g-r content-ribbon" id="contato">
     <div class="pure-u-1">
-        <h3>Tire sua dúvida sobre o Curso</h3>
+        <h3>Tire sua dÃºvida sobre o Curso</h3>
         {% if is_valid %}
-        <p>Você enviou o formulário com sucesso</p>
+        <p>VocÃª enviou o formulÃ¡rio com sucesso</p>
         {% endif %}
         <form action="#contato" class="pure-form pure-form-aligned" method="post">
             {% csrf_token %}

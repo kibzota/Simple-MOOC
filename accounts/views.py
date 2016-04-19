@@ -1,9 +1,10 @@
 """Account views."""
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 from django.contrib.auth.decorators import login_required
-from core.utils import generate_hash_key
+from courses.models import Enrollment
 from .forms import RegisterForm, EditAccountForm, PasswordResetForm
 from .models import PasswordReset
 
@@ -14,7 +15,9 @@ User = get_user_model()
 def dashboard(request):
     """Display user control panel."""
     template_name = 'accounts/dashboard.html'
-    return render(request, template_name)
+    context = {}
+    
+    return render(request, template_name, context)
 
 
 def register(request):
@@ -67,8 +70,10 @@ def edit(request):
         form = EditAccountForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            form = EditAccountForm(instance=request.user)
-            context['success'] = True
+            messages.success(
+                request, 'Os dados da sua conta foram alterados com sucesso'
+            )
+            return redirect('accounts:dashboard')
     else:
         form = EditAccountForm(instance=request.user)
     context['form'] = form

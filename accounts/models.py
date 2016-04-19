@@ -6,6 +6,7 @@ from django.core import validators
 from django.contrib.auth.models import (
     AbstractBaseUser, PermissionsMixin, UserManager)
 from django.conf import settings
+from courses.models import Course
 
 
 class User(AbstractBaseUser, PermissionsMixin):

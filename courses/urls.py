@@ -11,4 +11,6 @@ urlpatterns = [
         name="undo_enrollment"),
     url(r'^(?P<slug>[\w_-]+)/anuncios/$', views.announcements,
         name="announcements"),
+    url(r'^(?P<slug>[\w_-]+)/anuncios/(?P<pk>\d+)/$', views.show_announcement,
+        name='show_announcement'),
 ]

@@ -86,7 +86,7 @@ class Announcement(models.Model):
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     confirmed = models.BooleanField('Confirmado', default=False, blank=True)
 
-    def __str_(self):
+    def __str__(self):
         return self.title
 
     class Meta:
@@ -103,7 +103,10 @@ class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='usuário')
     comment = models.TextField('comentário')
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    confirmed = models.BooleanField('Confirmado', default=False, blank=True)
+    updated_at = models.DateTimeField('Atualizado em', auto_now=True)
+
+    def __str__(self):
+        return self.user, self.announcement.title
 
     class Meta:
         verbose_name = 'Comentário'

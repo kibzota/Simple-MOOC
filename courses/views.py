@@ -47,6 +47,24 @@ def enrollment(request, slug):
 
 
 @login_required
+def undo_enrollment(request, slug):
+    course = get_object_or_404(Course, slug=slug)
+    enrollment = get_object_or_404(
+        Enrollment, user=request.user, course=course
+    )
+    if request.method == 'POST':
+        enrollment.delete()
+        messages.success(request, 'Sua inscrição foi cancelada com sucesso')
+        return redirect('accounts:dashboard')
+    template_name = 'courses/undo_enrollment.html'
+    context = {
+        'enrollment': enrollment,
+        'course': course,
+    }
+    return render(request, template_name, context)
+
+
+@login_required
 def announcements(request, slug):
     course = get_object_or_404(Course, slug=slug)
     if not request.user.is_staff:
@@ -58,6 +76,7 @@ def announcements(request, slug):
             return redirect('accounts:dashboard')
     template = 'courses/announcements.html'
     context = {
-        'course': course
+        'course': course,
+        'announcements': course.announcements.all()
     }
     return render(request, template, context)

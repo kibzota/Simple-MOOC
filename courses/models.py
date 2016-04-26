@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 
 from core.mail import send_mail_template
 
@@ -35,6 +36,10 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
+    def release_lessons(self):
+        today = timezone.now().date()
+        return self.lesson.filter(release_date__lte=today)
+
     @models.permalink
     def get_absolute_url(self):
         return ('courses:details', (), {'slug': self.slug})
@@ -60,6 +65,12 @@ class Lesson (models.Model):
 
     def __str__(self):
         return self.name
+
+    def is_available(self):
+        if self.release_date:
+            today = timezone.now().date()
+            return self.release_date <= today
+        return False
 
     class Meta:
         verbose_name = 'Aula'

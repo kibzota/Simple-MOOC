@@ -9,12 +9,7 @@ decorator==3.4.2
 devassistant==0.11.2
 Django==1.9.5
 docutils==0.12
-feedgenerator==1.8
-fros==1.1
 gunicorn==19.4.5
-iniparse==0.4
-IPy==0.81
-javapackages==4.6.0
 Jinja2==2.8
 langtable==0.0.34
 livereload==2.4.1

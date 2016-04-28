@@ -24,3 +24,4 @@ requests-ftp==0.3.1
 Unidecode==0.4.19
 urllib3==1.13.1
 whitenoise==3.0
+dj-database-url==0.4.1
